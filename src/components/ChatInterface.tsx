@@ -68,7 +68,8 @@ const ChatInterface = ({chatId, initialMessages}: ChatInterfaceProps) => {
             })
 
             if(!response.ok) throw new Error(await response.text());
-            if(response.body) throw new Error("No response body available");``
+            if(response.body) throw new Error("No response body available");
+             
         } catch (error) {
             console.error(error)
             setMessages((prev)=>
@@ -82,6 +83,8 @@ const ChatInterface = ({chatId, initialMessages}: ChatInterfaceProps) => {
                 //     error instanceof Error ? error.message : "unknown error"
                 // )
             )
+        } finally {
+            setLoading(false);
         }
 
     }
