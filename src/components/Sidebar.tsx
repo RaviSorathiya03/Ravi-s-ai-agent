@@ -46,16 +46,22 @@ const Sidebar = () => {
           isMobileNavOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="p-4 border-b border-gray-200/50">
-          <Button
-            className="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-200/50 shadow-sm hover:shadow transition-all duration-200"
-            onClick={handleNewChat}
-          >
-            <PlusIcon className="mr-2 h-4 w-4" /> New Chat
-          </Button>
-        </div>
+       <div className="p-6 border-b border-gray-200/50 bg-gradient-to-b from-white to-gray-50">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">AI Chat Assistant</h2>
+      <Button
+        className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold tracking-wide border-none shadow-md hover:shadow-lg transition-all duration-300 group overflow-hidden relative"
+        onClick={handleNewChat}
+      >
+        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
+        <span className="absolute inset-0 w-full h-full flex items-center justify-center">
+          <PlusIcon className="mr-2 h-5 w-5 transform group-hover:rotate-90 transition-transform duration-300" />
+          <span className="relative z-10">New Chat</span>
+        </span>
+        <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-yellow-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+      </Button>
+    </div>
 
-        <div className="flex-1 overflow-y-auto space-y-2.5 p-4 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+        <div className="flex-1 overflow-y-hidden space-y-2.5 p-4 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
           {chats?.map((chat) => (
             <ChatRow key={chat._id} chat={chat} onDelete={handleDeleteChat} />
           ))}

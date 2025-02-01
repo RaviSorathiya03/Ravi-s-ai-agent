@@ -1,73 +1,105 @@
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+"use client"
+
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs"
+import { ArrowRight, Zap, Sparkles, Brain } from "lucide-react"
+import Link from "next/link"
+import { motion } from "framer-motion"
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50/50 flex items-center justify-center">
-      {/* Background pattern */}
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:6rem_4rem]" />
+    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/30 via-purple-400/30 to-pink-400/30 filter blur-3xl opacity-50" />
+      </div>
 
-      <section className="w-full px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col items-center space-y-10 text-center">
+      <section className="w-full px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col items-center space-y-16 text-center relative">
         {/* Hero content */}
-        <header className="space-y-6">
-          <h1 className="text-5xl font-bold tracking-tight sm:text-7xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+        <motion.header
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-5xl font-extrabold tracking-tight sm:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
             AI Agent Assistant
           </h1>
           <p className="max-w-[600px] text-lg text-gray-600 md:text-xl/relaxed xl:text-2xl/relaxed">
-            Meet your new AI chat companion that goes beyond conversation - it
-            can actually get things done!
-            <br />
-            <span className="text-gray-400 text-sm">
-              Powered by IBM&apos;s WxTools & your favourite LLM&apos;s.
-            </span>
+            Meet your new AI chat companion that goes beyond conversation - it can actually get things done!
           </p>
-        </header>
+          <p className="text-gray-400 text-sm animate-pulse">
+            Powered by IBM&apos;s WxTools & your favourite LLM&apos;s.
+          </p>
+        </motion.header>
 
         {/* CTA Button */}
-        <SignedIn>
-          <Link href="/dashboard">
-            <button className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-medium text-white bg-gradient-to-r from-gray-900 to-gray-800 rounded-full hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              Get Started
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-900/20 to-gray-800/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
-          </Link>
-        </SignedIn>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <SignedIn>
+            <Link href="/dashboard">
+              <button className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </button>
+            </Link>
+          </SignedIn>
 
-        <SignedOut>
-          <SignInButton
-            mode="modal"
-            fallbackRedirectUrl={"/dashboard"}
-            forceRedirectUrl={"/dashboard"}
-          >
-            <button className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-medium text-white bg-gradient-to-r from-gray-900 to-gray-800 rounded-full hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              Sign Up
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-900/20 to-gray-800/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
-          </SignInButton>
-        </SignedOut>
+          <SignedOut>
+            <SignInButton mode="modal" fallbackRedirectUrl={"/dashboard"} forceRedirectUrl={"/dashboard"}>
+              <button className="group relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                Sign Up
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </button>
+            </SignInButton>
+          </SignedOut>
+        </motion.div>
 
         {/* Features grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 pt-8 max-w-3xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 pt-12 w-full max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           {[
-            { title: "Fast", description: "Real-time streamed responses" },
-            {
-              title: "Modern",
-              description: "Next.js 15, Tailwind CSS, Convex, Clerk",
-            },
-            { title: "Smart", description: "Powered by Your Favourite LLM's" },
-          ].map(({ title, description }) => (
-            <div key={title} className="text-center">
-              <div className="text-2xl font-semibold text-gray-900">
-                {title}
-              </div>
-              <div className="text-sm text-gray-600 mt-1">{description}</div>
-            </div>
+            { title: "Lightning Fast", description: "Real-time streamed responses", icon: Zap },
+            { title: "Cutting-Edge Tech", description: "Next.js 15, Tailwind CSS, Convex, Clerk", icon: Sparkles },
+            { title: "AI-Powered", description: "Leveraging state-of-the-art LLMs", icon: Brain },
+          ].map(({ title, description, icon: Icon }) => (
+            <motion.div
+              key={title}
+              className="bg-white/80 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Icon className="w-12 h-12 mx-auto mb-4 text-purple-600" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
+              <p className="text-sm text-gray-600">{description}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Testimonial */}
+        <motion.div
+          className="mt-16 bg-white/60 backdrop-blur-lg rounded-2xl p-8 shadow-lg max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <p className="text-lg text-gray-700 italic">
+            "This AI assistant has revolutionized the way I work. It's not just a chatbot, it's a productivity
+            powerhouse!"
+          </p>
+          <p className="mt-4 font-semibold text-gray-900">- Sarah Johnson, Tech Entrepreneur</p>
+        </motion.div>
       </section>
     </main>
-  );
+  )
 }
+
